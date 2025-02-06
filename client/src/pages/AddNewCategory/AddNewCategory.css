@@ -1,0 +1,17 @@
+.newCategoryContainer {
+  display: flex;
+  flex-wrap: wrap;
+  width: 50%;
+  height: 300px;
+  border: solid 1px #075c93;
+}
+.newCategoryTitle {
+  width: 100%;
+}
+input {
+  width: 90%;
+  height: 25px;
+  border-radius: 30px;
+  border: none;
+  box-shadow: 0px 0px 4px 0px black;
+}
