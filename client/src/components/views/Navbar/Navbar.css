@@ -1,0 +1,68 @@
+.navBar {
+  background-color: rgb(137, 185, 215);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  position: sticky;
+  top: 0;
+}
+
+.appLogo {
+  height: 50px;
+  padding: 0.7rem;
+}
+
+.linksList {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.linksList li a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.linksList li a:hover {
+  color: grey;
+}
+
+.hamburgerButton {
+  display: none;
+}
+
+@media (max-width: 680px) {
+  .hamburgerButton {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 2.25rem;
+    height: 2rem;
+    cursor: pointer;
+  }
+
+  .hamburgerButton span {
+    height: 0.4rem;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 0.2rem;
+  }
+
+  .linksList {
+    display: none;
+  }
+
+  .openLinksList {
+    flex-direction: column;
+    padding-right: 1rem;
+    width: 100%;
+    display: flex;
+    margin-top: 0;
+    gap: 1rem;
+    transition: 3s;
+  }
+}
