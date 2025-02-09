@@ -15,16 +15,13 @@ export const Navbar = () => {
       <img className="appLogo" src={logo} />
       <ul className={`linksList ${menuOpen ? 'openLinksList' : ''}`}>
         <li>
-          <Link to={'/'}>בית</Link>
-        </li>
-        <li>
           <Link to={'/addNewCategory'}>קטגוריה חדשה</Link>
         </li>
         <li>
           <Link to={'/addNewProduct'}>פריט חדש</Link>
         </li>
         <li>
-          <Link to={'/scanProduct'}>סרוק מוצר</Link>
+          <Link to={'/'}>סרוק מוצר</Link>
         </li>
         <li>
           <Link to={'/stockList'}>רשימת מלאי</Link>
