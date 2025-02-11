@@ -7,7 +7,6 @@ const App = () => {
   return (
     <>
       <Navbar />
-      <h1>אפליקצייה לניהול המלאי במחסן</h1>
       <Routes>
         <Route path="/addNewCategory" element={<AddNewCategory />}></Route>
         <Route path="/addNewProduct" element={<AddNewProduct />}></Route>
