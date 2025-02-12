@@ -8,12 +8,19 @@ export const AddNewCategory = () => {
     <div className="newCategoryPage">
       <div className="newCategoryTitle">הוספת קטגוריה חדשה</div>
       <form className="newCategoryFormContainer">
-        <InputWithLabel size="small" variant="outlined" label="שם קטגוריה" type="text" />
+        <InputWithLabel
+          size="small"
+          variant="outlined"
+          label="שם קטגוריה"
+          type="text"
+          required={true}
+        />
         <AutocompleteInput
           options={unitOptions}
           size="small"
           variant="outlined"
           label="סוג יחידה"
+          required={true}
         />
         <InputWithLabel size="small" variant="outlined" label="כמות מינימלית" type="number" />
         <InputWithLabel

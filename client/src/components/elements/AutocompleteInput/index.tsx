@@ -5,12 +5,20 @@ type AutocompleteInputProps = {
   label: string;
   size: 'small' | 'medium';
   variant: 'outlined' | 'standard' | 'filled';
+  required?: boolean;
 };
 
-export const AutocompleteInput = ({ size, options, label, variant }: AutocompleteInputProps) => {
+export const AutocompleteInput = ({
+  size,
+  options,
+  label,
+  variant,
+  required,
+}: AutocompleteInputProps) => {
   return (
     <Autocomplete
       options={options}
+      noOptionsText="אין אפשרויות"
       getOptionLabel={(option) => option.label}
       renderInput={(params) => (
         <TextField
@@ -18,6 +26,7 @@ export const AutocompleteInput = ({ size, options, label, variant }: Autocomplet
           label={label}
           variant={variant}
           size={size}
+          required={required || false}
           sx={{
             '& .MuiOutlinedInput-root': {
               borderRadius: '10px',

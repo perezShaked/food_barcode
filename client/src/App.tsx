@@ -9,7 +9,7 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/addNewCategory" element={<AddNewCategory />}></Route>
-        <Route path="/addNewProduct" element={<AddNewProduct />}></Route>
+        <Route path="/addNewProduct" element={<AddNewProduct barcode={123456788886} />}></Route>
         <Route path="/" element={<ScanProduct />}></Route>
         <Route path="/stockList" element={<StockList />}></Route>
       </Routes>
