@@ -29,7 +29,7 @@ export const AddNewCategory = () => {
           label="כמות יחידות מינימלית"
           type="number"
         />
-        <SubmitButton label="הוסף" variant="contained"></SubmitButton>
+        <SubmitButton label="הוסף" variant="contained" widthRem={7}></SubmitButton>
       </form>
     </div>
   );

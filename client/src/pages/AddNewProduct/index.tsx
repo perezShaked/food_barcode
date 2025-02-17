@@ -46,7 +46,7 @@ export const AddNewProduct = ({ barcode }: AddNewProductProps) => {
           type="number"
           required={true}
         ></InputWithLabel>
-        <SubmitButton label="הוסף" variant="contained"></SubmitButton>
+        <SubmitButton label="הוסף" variant="contained" widthRem={7}></SubmitButton>
       </form>
     </div>
   );
