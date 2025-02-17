@@ -1,16 +1,35 @@
-import './InputWithLabel.css';
+import { TextField } from '@mui/material';
 
 type inputWithLapelProps = {
-  name: string;
-  placeHolder: string;
-  title: string;
+  label: string;
+  size: 'small' | 'medium';
+  variant: 'outlined' | 'standard' | 'filled';
+  type?: React.HTMLInputTypeAttribute;
+  defaultValue?: any;
+  required?: boolean;
 };
 
-export const InputWithLabel = ({ name, placeHolder, title }: inputWithLapelProps) => {
+export const InputWithLabel = ({
+  label,
+  size,
+  variant,
+  type,
+  defaultValue,
+  required,
+}: inputWithLapelProps) => {
   return (
-    <div className="inputWithTitle">
-      <div>{title}</div>
-      <input placeholder={placeHolder}></input>
-    </div>
+    <TextField
+      size={size}
+      label={label}
+      variant={variant}
+      type={type}
+      defaultValue={defaultValue}
+      required={required || false}
+      sx={{
+        '& .MuiOutlinedInput-root': {
+          borderRadius: '10px',
+        },
+      }}
+    />
   );
 };

@@ -1,0 +1,16 @@
+.scanBarcodePage {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.scanBarcodeTitle {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.scanBarcodePage button {
+  align-self: center;
+}

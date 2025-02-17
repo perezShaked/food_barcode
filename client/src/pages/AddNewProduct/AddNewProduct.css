@@ -1,20 +1,19 @@
-.newCategoryPage {
+.newProductPage {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   align-content: center;
 }
 
-.newCategoryFormContainer {
+.newProductFormContainer {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   align-content: center;
   gap: 1.5rem;
-  width: 100%;
 }
 
-.newCategoryFormContainer input {
+.newProductFormContainer input {
   width: 15rem;
 }
 
@@ -22,7 +21,7 @@ button {
   align-self: flex-end;
 }
 
-.newCategoryTitle {
+.newProductTitle {
   align-self: center;
   font-size: 30px;
   font-weight: bold;
