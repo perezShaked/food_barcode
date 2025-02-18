@@ -1,9 +1,12 @@
 import { InputWithLabel, AutocompleteInput, SubmitButton } from '../../components/elements';
+import { useUnits } from '../../hooks';
+import { mapToAutocompleteOptions } from '../../utils';
 import './AddNewCategory.css';
 
-const unitOptions = [{ label: 'מל' }, { label: 'גרם' }, { label: 'מארז' }, { label: 'קופסה' }];
-
 export const AddNewCategory = () => {
+  const { units, unitsError } = useUnits();
+  const unitOptions = unitsError ? [] : mapToAutocompleteOptions(units, 'unit_name');
+
   return (
     <div className="newCategoryPage">
       <div className="newCategoryTitle">הוספת קטגוריה חדשה</div>

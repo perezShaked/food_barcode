@@ -1,7 +1,7 @@
 import { Autocomplete, TextField } from '@mui/material';
 
 type AutocompleteInputProps = {
-  options: { label: string }[];
+  options: { label: string }[] | [];
   label: string;
   size: 'small' | 'medium';
   variant: 'outlined' | 'standard' | 'filled';
