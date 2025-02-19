@@ -6,10 +6,7 @@ import './AddNewCategory.css';
 
 export const AddNewCategory = () => {
   const [onSubmit, setOnSubmit] = useState(false);
-  const [selectedUnit, setSelectedUnit] = useState<{ label: string; id: string }>({
-    label: '',
-    id: '0',
-  });
+  const [selectedUnit, setSelectedUnit] = useState<{ label: string; id: string } | null>(null);
   const [categoryName, setCategoryName] = useState('');
   const [reorderQuantityLevel, setReorderQuantityLevel] = useState<number>();
   const [reorderCountLevel, setReorderCountLevel] = useState<number>();
@@ -42,7 +39,7 @@ export const AddNewCategory = () => {
           required={true}
           error={onSubmit && !selectedUnit}
           helperText={onSubmit && !selectedUnit ? 'שדה חובה' : ''}
-          value={selectedUnit}
+          value={selectedUnit || { label: '', id: '0' }}
           onChange={(_element, newElement) => {
             newElement && setSelectedUnit({ label: newElement.label, id: newElement.id });
           }}

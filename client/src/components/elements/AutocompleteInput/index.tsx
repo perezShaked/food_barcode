@@ -14,6 +14,7 @@ export const AutocompleteInput = ({
   options = [],
   error,
   helperText,
+  required,
   ...rest
 }: AutocompleteInputProps) => {
   return (
@@ -29,6 +30,7 @@ export const AutocompleteInput = ({
           size={size}
           error={error}
           helperText={helperText}
+          required={required}
           sx={{
             '& .MuiOutlinedInput-root': {
               borderRadius: '10px',
