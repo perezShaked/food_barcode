@@ -1,13 +1,12 @@
 import { Autocomplete, TextField, AutocompleteProps } from '@mui/material';
 
 type AutocompleteInputProps = {
-  options: { label: string }[];
   label: string;
   size?: 'small' | 'medium';
   required: boolean;
   error: boolean;
   helperText: string;
-} & Omit<AutocompleteProps<{ label: string }, false, false, false>, 'renderInput'>;
+} & Omit<AutocompleteProps<{ label: string; id: string }, false, true, false>, 'renderInput'>;
 
 export const AutocompleteInput = ({
   size = 'small',

@@ -1,23 +1,26 @@
 import { useState } from 'react';
-import { InputWithLabel, AutocompleteInput, SubmitButton } from '../../components/elements';
+import { InputWithLabel, AutocompleteInput, SubmitButton } from '../../components';
 import { useUnits } from '../../hooks';
 import { mapToAutocompleteOptions } from '../../utils';
 import './AddNewCategory.css';
 
 export const AddNewCategory = () => {
   const [onSubmit, setOnSubmit] = useState(false);
-  const [selectedUnit, setSelectedUnit] = useState<string>('');
+  const [selectedUnit, setSelectedUnit] = useState<{ label: string; id: string }>({
+    label: '',
+    id: '0',
+  });
   const [categoryName, setCategoryName] = useState('');
   const [reorderQuantityLevel, setReorderQuantityLevel] = useState<number>();
   const [reorderCountLevel, setReorderCountLevel] = useState<number>();
 
   const { units, unitsError } = useUnits();
-  const unitOptions = unitsError ? [] : mapToAutocompleteOptions(units, 'unit_name');
+  const unitOptions = unitsError ? [] : mapToAutocompleteOptions(units, 'unit_name', 'unit_id');
 
   const handleAddCategoryClick = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setOnSubmit(true);
-    console.log(event.target);
+    console.log(selectedUnit);
   };
 
   return (
@@ -34,13 +37,14 @@ export const AddNewCategory = () => {
         />
         <AutocompleteInput
           options={unitOptions}
+          disableClearable
           label="סוג יחידה"
           required={true}
           error={onSubmit && !selectedUnit}
           helperText={onSubmit && !selectedUnit ? 'שדה חובה' : ''}
-          value={{ label: selectedUnit }}
+          value={selectedUnit}
           onChange={(_element, newElement) => {
-            newElement && setSelectedUnit(newElement.label);
+            newElement && setSelectedUnit({ label: newElement.label, id: newElement.id });
           }}
         />
         <InputWithLabel
