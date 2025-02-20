@@ -50,11 +50,9 @@ export const BarcodeScanner = ({ onScan, scanning }: BarcodeScannerProps) => {
         <div className="barcodeScannerContainer">
           <video className="videoWindow" ref={videoRef} />
 
-          {scanned && (
-            <SnackBar open={true} message="הקוד נסרק בהצלחה" severity="success"></SnackBar>
-          )}
+          <SnackBar open={scanned} message="הקוד נסרק בהצלחה" severity="success"></SnackBar>
 
-          {error && <SnackBar open={true} message={error} severity="error"></SnackBar>}
+          <SnackBar open={Boolean(error)} message={error ?? ''} severity="error"></SnackBar>
         </div>
       )}
     </div>

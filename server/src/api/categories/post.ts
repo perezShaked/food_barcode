@@ -5,7 +5,6 @@ import { NewCategorySchema } from '../../validation';
 import { isCategoryExist, isUnitIdExist } from '../../utils';
 
 export const postNewCategory = async (req: Request, res: Response) => {
-  //בודק מול הסכמה שהיא מכילה את כל השדות הנכונים
   const newCategoryInformation = NewCategorySchema.safeParse(req.body);
   if (!newCategoryInformation.success) {
     res.status(StatusCodes.BAD_REQUEST).json({
@@ -16,9 +15,15 @@ export const postNewCategory = async (req: Request, res: Response) => {
     const { category_name, unit_id, reorder_quantity_level, reorder_count_level } = req.body;
 
     if (!(await isUnitIdExist(unit_id))) {
-      res.status(StatusCodes.BAD_REQUEST).send('invalid unit id');
+      res.status(StatusCodes.BAD_REQUEST).json({
+        error: 'INVALID_UNIT_ID',
+        message: 'סוג יחידה לא קיים במערכת',
+      });
     } else if (await isCategoryExist(category_name)) {
-      res.status(StatusCodes.BAD_REQUEST).send('category name already exist');
+      res.status(StatusCodes.BAD_REQUEST).json({
+        error: 'CATEGORY_EXISTS',
+        message: 'הקטגוריה כבר קיימת במערכת',
+      });
     } else {
       try {
         await insertNewCategory(
@@ -27,9 +32,12 @@ export const postNewCategory = async (req: Request, res: Response) => {
           reorder_quantity_level ?? 0,
           reorder_count_level ?? 0
         );
-        res.status(StatusCodes.CREATED).send('category Add (:');
+        res.status(StatusCodes.CREATED).json({ message: 'הקטגוריה נוספה בהצלחה' });
       } catch (error) {
-        res.status(StatusCodes.NOT_MODIFIED).send('An error occurred while adding the category');
+        res.status(StatusCodes.NOT_MODIFIED).json({
+          error: 'An error occurred while adding the category',
+          message: 'קרתה שגיאה בשליחת הנתונים, נסה שנית',
+        });
       }
     }
   }

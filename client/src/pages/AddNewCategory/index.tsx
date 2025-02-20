@@ -1,23 +1,63 @@
 import { useState } from 'react';
-import { InputWithLabel, AutocompleteInput, SubmitButton } from '../../components';
+import { InputWithLabel, AutocompleteInput, SubmitButton, SnackBar } from '../../components';
 import { useUnits } from '../../hooks';
 import { mapToAutocompleteOptions } from '../../utils';
+import { addNewCategoryAPI } from '../../services';
 import './AddNewCategory.css';
 
 export const AddNewCategory = () => {
   const [onSubmit, setOnSubmit] = useState(false);
   const [selectedUnit, setSelectedUnit] = useState<{ label: string; id: string } | null>(null);
   const [categoryName, setCategoryName] = useState('');
-  const [reorderQuantityLevel, setReorderQuantityLevel] = useState<number>();
-  const [reorderCountLevel, setReorderCountLevel] = useState<number>();
+  const [reorderQuantityLevel, setReorderQuantityLevel] = useState<number | ''>('');
+  const [reorderCountLevel, setReorderCountLevel] = useState<number | ''>('');
+  const [success, setSuccess] = useState(false);
+  const [error, SetError] = useState<string | null>(null);
 
   const { units, unitsError } = useUnits();
   const unitOptions = unitsError ? [] : mapToAutocompleteOptions(units, 'unit_name', 'unit_id');
 
-  const handleAddCategoryClick = (event: React.FormEvent<HTMLFormElement>) => {
+  const restartNewCategoryFields = () => {
+    setCategoryName('');
+    setSelectedUnit(null);
+    setReorderQuantityLevel('');
+    setReorderCountLevel('');
+    setOnSubmit(false);
+  };
+
+  const handleAddCategoryClick = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setOnSubmit(true);
-    console.log(selectedUnit);
+
+    if (!selectedUnit || !categoryName) {
+      SetError('נא למלא שדות חובה');
+      setTimeout(() => {
+        SetError(null);
+      }, 3000);
+      return;
+    }
+
+    try {
+      await addNewCategoryAPI(
+        categoryName,
+        Number(selectedUnit.id),
+        reorderQuantityLevel,
+        reorderCountLevel
+      );
+      setSuccess(true);
+      restartNewCategoryFields();
+    } catch (error) {
+      if (error instanceof Error) {
+        SetError(error.message);
+      } else {
+        SetError('אירעה שגיאה לא ידועה');
+      }
+    } finally {
+      setTimeout(() => {
+        setSuccess(false);
+        SetError(null);
+      }, 3000);
+    }
   };
 
   return (
@@ -30,7 +70,6 @@ export const AddNewCategory = () => {
           value={categoryName}
           onChange={(e) => setCategoryName(e.target.value)}
           error={onSubmit && !categoryName}
-          helperText={onSubmit && !categoryName ? 'שדה חובה' : ''}
         />
         <AutocompleteInput
           options={unitOptions}
@@ -38,7 +77,6 @@ export const AddNewCategory = () => {
           label="סוג יחידה"
           required={true}
           error={onSubmit && !selectedUnit}
-          helperText={onSubmit && !selectedUnit ? 'שדה חובה' : ''}
           value={selectedUnit || { label: '', id: '0' }}
           onChange={(_element, newElement) => {
             newElement && setSelectedUnit({ label: newElement.label, id: newElement.id });
@@ -57,6 +95,8 @@ export const AddNewCategory = () => {
           onChange={(e) => setReorderCountLevel(Number(e.target.value))}
         />
         <SubmitButton label="הוסף" variant="contained" widthRem={7} type="submit"></SubmitButton>
+        <SnackBar message="הקטגריה נוספה בהצלחה" open={success} severity="success" />
+        <SnackBar message={error ?? ''} open={Boolean(error)} severity="error" />
       </form>
     </div>
   );

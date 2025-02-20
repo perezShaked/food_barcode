@@ -4,8 +4,6 @@ import { db } from '../config';
 export const isUnitIdExist = (unit_id: number): Promise<boolean> => {
   return new Promise<boolean>((resolve, reject) => {
     db.query(GET_UNIT_BY_ID, [unit_id], (error, result) => {
-      console.log(result);
-
       error ? reject(error) : resolve(Boolean(result.rowCount));
     });
   });
