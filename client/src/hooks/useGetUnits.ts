@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
-import { getUnits } from '../services';
+import { getUnitsAPI } from '../services';
 
-export function useUnits() {
+export function useGetUnits() {
   const [units, setUnits] = useState([]);
   const [unitsError, setUnitsError] = useState(null);
 
   useEffect(() => {
-    getUnits()
+    getUnitsAPI()
       .then((data) => setUnits(data))
       .catch((err) => setUnitsError(err));
   }, []);

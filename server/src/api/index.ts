@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import { unitsRouter } from './units';
-import { categoryRouter } from './categories';
+import { categoriesRouter } from './categories';
 
 export const apiRouter = Router();
 
 apiRouter.use('/units', unitsRouter);
-apiRouter.use('/categories', categoryRouter);
+apiRouter.use('/categories', categoriesRouter);

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import './Navbar.css';
-import logo from '../../../services/white-tuna.png';
+import logo from '../../../../public/white-tuna.png';
 import { useState } from 'react';
 
 export const Navbar = () => {

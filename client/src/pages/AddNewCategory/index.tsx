@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { InputWithLabel, AutocompleteInput, SubmitButton, SnackBar } from '../../components';
-import { useUnits } from '../../hooks';
+import { useGetUnits } from '../../hooks';
 import { mapToAutocompleteOptions } from '../../utils';
 import { addNewCategoryAPI } from '../../services';
 import './AddNewCategory.css';
@@ -14,7 +14,7 @@ export const AddNewCategory = () => {
   const [success, setSuccess] = useState(false);
   const [error, SetError] = useState<string | null>(null);
 
-  const { units, unitsError } = useUnits();
+  const { units, unitsError } = useGetUnits();
   const unitOptions = unitsError ? [] : mapToAutocompleteOptions(units, 'unit_name', 'unit_id');
 
   const restartNewCategoryFields = () => {

@@ -1,2 +1,2 @@
-export * from './unitsAPI';
-export * from './categoriesAPI';
+export * from './getUnitsAPI';
+export * from './addNewCategoryAPI';

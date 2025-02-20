@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { postNewCategory } from './post';
 
-export const categoryRouter = Router();
+export const categoriesRouter = Router();
 
-categoryRouter.post('/', postNewCategory);
+categoriesRouter.post('/', postNewCategory);
