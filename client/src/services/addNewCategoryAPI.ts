@@ -12,7 +12,7 @@ export const addNewCategoryAPI = async (
         category_name: categoryName,
         unit_id: unitId,
         reorder_quantity_level: reorderQuantityLevel ? reorderQuantityLevel : 0,
-        reorder_count_level: reorderCountLevel ? reorderQuantityLevel : 0,
+        reorder_count_level: reorderCountLevel ? reorderCountLevel : 0,
       }),
     });
 
