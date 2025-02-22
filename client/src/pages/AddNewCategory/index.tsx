@@ -37,6 +37,13 @@ export const AddNewCategory = () => {
       return;
     }
 
+    if (Number(reorderCountLevel) < 0 || Number(reorderQuantityLevel) < 0) {
+      SetError('נא למלא מספר חיובי בשדות הכמות');
+      setTimeout(() => {
+        SetError(null);
+      }, 3000);
+      return;
+    }
     try {
       await addNewCategoryAPI(
         categoryName,
@@ -87,12 +94,14 @@ export const AddNewCategory = () => {
           type="number"
           value={reorderQuantityLevel}
           onChange={(e) => setReorderQuantityLevel(Number(e.target.value))}
+          error={onSubmit && Number(reorderQuantityLevel) < 0}
         />
         <InputWithLabel
           label="כמות יחידות מינימלית"
           type="number"
           value={reorderCountLevel}
           onChange={(e) => setReorderCountLevel(Number(e.target.value))}
+          error={onSubmit && Number(reorderCountLevel) < 0}
         />
         <SubmitButton label="הוסף" variant="contained" widthRem={7} type="submit"></SubmitButton>
         <SnackBar message="הקטגריה נוספה בהצלחה" open={success} severity="success" />

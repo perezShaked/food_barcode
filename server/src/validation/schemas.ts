@@ -10,6 +10,6 @@ export const UnitsSchema = z.array(
 export const NewCategorySchema = z.object({
   category_name: z.string(),
   unit_id: z.number(),
-  reorder_quantity_level: z.number().optional(),
-  reorder_count_level: z.number().optional(),
+  reorder_quantity_level: z.number().min(0).optional(),
+  reorder_count_level: z.number().min(0).optional(),
 });

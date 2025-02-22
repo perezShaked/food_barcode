@@ -3,6 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 import { insertNewCategory } from '../../dal';
 import { NewCategorySchema } from '../../validation';
 import { isCategoryExist, isUnitIdExist } from '../../utils';
+import { NewCategory } from '../../types';
 
 export const postNewCategory = async (req: Request, res: Response) => {
   const newCategoryInformation = NewCategorySchema.safeParse(req.body);
@@ -12,7 +13,8 @@ export const postNewCategory = async (req: Request, res: Response) => {
       details: newCategoryInformation.error.errors,
     });
   } else {
-    const { category_name, unit_id, reorder_quantity_level, reorder_count_level } = req.body;
+    const { category_name, unit_id, reorder_quantity_level, reorder_count_level }: NewCategory =
+      req.body;
 
     if (!(await isUnitIdExist(unit_id))) {
       res.status(StatusCodes.BAD_REQUEST).json({
@@ -26,12 +28,12 @@ export const postNewCategory = async (req: Request, res: Response) => {
       });
     } else {
       try {
-        await insertNewCategory(
+        await insertNewCategory({
           category_name,
           unit_id,
-          reorder_quantity_level ?? 0,
-          reorder_count_level ?? 0
-        );
+          reorder_quantity_level,
+          reorder_count_level,
+        });
         res.status(StatusCodes.CREATED).json({ message: 'הקטגוריה נוספה בהצלחה' });
       } catch (error) {
         res.status(StatusCodes.NOT_MODIFIED).json({
