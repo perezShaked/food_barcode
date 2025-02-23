@@ -1,22 +1,23 @@
-import { Autocomplete, TextField } from '@mui/material';
+import { Autocomplete, TextField, AutocompleteProps } from '@mui/material';
 
 type AutocompleteInputProps = {
-  options: { label: string }[];
   label: string;
-  size: 'small' | 'medium';
-  variant: 'outlined' | 'standard' | 'filled';
-  required?: boolean;
-};
+  size?: 'small' | 'medium';
+  required: boolean;
+  error: boolean;
+} & Omit<AutocompleteProps<{ label: string; id: string }, false, true, false>, 'renderInput'>;
 
 export const AutocompleteInput = ({
-  size,
-  options,
+  size = 'small',
   label,
-  variant,
+  options = [],
+  error,
   required,
+  ...rest
 }: AutocompleteInputProps) => {
   return (
     <Autocomplete
+      {...rest}
       options={options}
       noOptionsText="אין אפשרויות"
       getOptionLabel={(option) => option.label}
@@ -24,9 +25,9 @@ export const AutocompleteInput = ({
         <TextField
           {...params}
           label={label}
-          variant={variant}
           size={size}
-          required={required || false}
+          error={error}
+          required={required}
           sx={{
             '& .MuiOutlinedInput-root': {
               borderRadius: '10px',
