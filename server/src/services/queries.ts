@@ -14,3 +14,8 @@ SELECT
 	category_id
 	FROM public.categories
 	WHERE category_name = $1`;
+
+export const GET_CATEGORIES = `
+SELECT 
+	category_id, category_name, unit_id
+	FROM public.categories`;

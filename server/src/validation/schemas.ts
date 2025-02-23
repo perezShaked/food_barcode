@@ -13,3 +13,11 @@ export const NewCategorySchema = z.object({
   reorder_quantity_level: z.number().min(0).optional(),
   reorder_count_level: z.number().min(0).optional(),
 });
+
+export const CategoriesSchema = z.array(
+  z.object({
+    category_id: z.number(),
+    category_name: z.string(),
+    unit_id: z.number(),
+  })
+);
