@@ -21,3 +21,11 @@ export const CategoriesSchema = z.array(
     unit_id: z.number(),
   })
 );
+
+export const NewProductSchema = z.object({
+  barcode: z.number(),
+  product_name: z.string(),
+  company: z.string().optional(),
+  category_id: z.number(),
+  quantity: z.number(),
+});
