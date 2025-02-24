@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { insertNewCategory } from '../../dal';
 import { NewCategorySchema } from '../../validation';
-import { isCategoryExist, isUnitIdExist } from '../../utils';
+import { isCategoryExistByName, isUnitIdExist } from '../../utils';
 import { NewCategory } from '../../types';
 
 export const postNewCategory = async (req: Request, res: Response) => {
@@ -21,7 +21,7 @@ export const postNewCategory = async (req: Request, res: Response) => {
         error: 'INVALID_UNIT_ID',
         message: 'סוג יחידה לא קיים במערכת',
       });
-    } else if (await isCategoryExist(category_name)) {
+    } else if (await isCategoryExistByName(category_name)) {
       res.status(StatusCodes.BAD_REQUEST).json({
         error: 'CATEGORY_EXISTS',
         message: 'הקטגוריה כבר קיימת במערכת',

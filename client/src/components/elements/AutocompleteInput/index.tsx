@@ -18,6 +18,11 @@ export const AutocompleteInput = ({
   return (
     <Autocomplete
       {...rest}
+      slotProps={{
+        listbox: {
+          sx: { maxHeight: 200 },
+        },
+      }}
       options={options}
       noOptionsText="אין אפשרויות"
       getOptionLabel={(option) => option.label}
